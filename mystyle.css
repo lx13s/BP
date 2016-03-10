@@ -1,0 +1,119 @@
+body {
+  background: rgba(128, 128, 128, 0.4);
+}
+
+x3d {
+  width: 80%;
+  height: 80%;
+  border: none;
+}
+
+#main_nav {
+  position: absolute;
+  right: 50px;
+  top: 50px;
+  width: 250px;
+  background-color: #EEE;
+  border: 1px solid silver;
+  padding: 20px;
+  z-index: 5;
+  opacity: 0.8;
+}
+
+.img_button {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 9px;
+}
+
+.img_button:first-child {
+  border-right: 1px solid #393838;
+}
+
+.img_button_active {
+  background-color: #77ace8;
+}
+
+.img_div {
+  float: right;
+  height: 30px;
+  margin-right: 30px;
+  border: 1px solid #393838;
+}
+
+label {
+  line-height: 30px;
+}
+
+li {
+  height: 32px;
+  margin-top: 15px;
+  width: 220px;
+  margin-left: -13px;
+}
+
+#button_table {
+   list-style-type: none;
+   }
+
+table {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 2px;
+  border-color: grey;
+}
+
+hr {
+  display: block;
+  -webkit-margin-before: 0.5em;
+  -webkit-margin-after: 0.5em;
+  -webkit-margin-start: auto;
+  -webkit-margin-end: auto;
+  border-style: inset;
+  border-width: 1px;
+}
+
+.viewpoint_button {
+  width: 150px;
+  height: 30px;
+  margin-left: 50px;
+  color: rgb(68,68,68);
+  border: 1px solid #A4A4A4;
+  border-radius: 2px;
+  background: #E6E6E6;
+  transition: all .218s ease 0s;
+}
+
+.button15 {
+  display: block;
+  font-family: arial,sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: rgb(68,68,68);
+  text-decoration: none;
+  user-select: none;
+  width: 150px;
+  height: 30px;
+  margin-left: 70px;
+  text-align: center;
+  line-height: 30px;
+  outline: none;
+  border: 1px solid #A4A4A4;
+  border-radius: 2px;
+  background: #E6E6E6;
+  transition: all .218s ease 0s;
+}
+/*a.button15:hover {
+  color: rgb(24,24,24);
+  border: 1px solid rgb(198,198,198);
+  background: #f7f7f7 linear-gradient(#f7f7f7, #f1f1f1);
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+a.button15:active {
+  color: rgb(51,51,51);
+  border: 1px solid rgb(204,204,204);
+  background: rgb(238,238,238) linear-gradient(rgb(238,238,238), rgb(224,224,224));
+  box-shadow: 0 1px 2px rgba(0,0,0,.1) inset;
+}*/
