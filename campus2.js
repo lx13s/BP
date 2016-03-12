@@ -79,7 +79,7 @@ function render() {
       var img_human = document.createElement("img");
       img_human.setAttribute('src', 'human.png');
       img_human.setAttribute('class', 'viewpoint_button');
-      img_human.setAttribute('onclick', `setViewpointById('${item.humanViewpoint.id}'); document.getElementById('${item.humanViewpoint.id}').setAttribute('set_bind', 'true'); setHighlightedItem(this);`);
+      img_human.setAttribute('onclick', `setViewpointById('${item.humanViewpoint.id}'); document.getElementById('${item.humanViewpoint.id}').setAttribute('set_bind', 'true'); changeImage(this);`);
       img_human.setAttribute('title', 'Human view');
       img_div.appendChild(img_human);
     }
@@ -88,7 +88,7 @@ function render() {
       var img_bird = document.createElement("img");
       img_bird.setAttribute('src', 'bird.png');
       img_bird.setAttribute('class', 'viewpoint_button');
-      img_bird.setAttribute('onclick', `setViewpointById('${item.birdViewpoint.id}'); document.getElementById('${item.birdViewpoint.id}').setAttribute('set_bind', 'true'); setHighlightedItem(this);`);
+      img_bird.setAttribute('onclick', `setViewpointById('${item.birdViewpoint.id}'); document.getElementById('${item.birdViewpoint.id}').setAttribute('set_bind', 'true'); changeImage(this);`);
       img_bird.setAttribute('title', 'Bird view');
       img_div.appendChild(img_bird);
     }
@@ -135,7 +135,7 @@ function createViewpoint(scene, viewpoint) {
 
 // Change picture on the active button
 function changeImage(element) {
-    var imgs = document.getElementsByClassName("img_button");
+    var imgs = document.getElementsByClassName("viewpoint_button");
     for (var i = 0; i < imgs.length; i++)
     {
          if (element !== imgs[i] && imgs[i].src.match("human")) {
@@ -168,6 +168,7 @@ function setHighlightedItem(item) {
   }
   item.className += ' viewpoint_button_active';
 }
+
 
 
 function setViewpointById(viewpointId) {
