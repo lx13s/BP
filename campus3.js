@@ -98,14 +98,20 @@ function render() {
 }
 
 function route () {
-  var viewpointArray = ["fel_human", "ntk_human", "vscht_human"];
+  var viewpointArray = [
+    ["fel_human", "false"],
+    ["ntk_human", "false"],
+    ["vscht_human", "false"]
+  ];
+  var visitedViewpoints = [];
   for (var i = 0; i < viewpointArray.length; i++)
   {
-    setTimeout(movecamera, i * document.getElementById("navType").getAttribute("transitiontime") * 1000, viewpointArray[i]);
+    setTimeout(movecamera, i * document.getElementById("navType").getAttribute("transitiontime") * 1000, viewpointArray[i][0]);
   }
 }
 
-function clickMe(element) {
+// Функция для показа-скрытия элемента гуи
+function hideShowMenu(element) {
   if (element.getAttribute('active') == 'true') {
     element.innerHTML = '[+]';
     element.setAttribute('active', 'false');
@@ -125,12 +131,45 @@ function movecamera(viewpointId){
   viewpointItem.setAttribute('set_bind', 'true');
 }
 
+var timePrev = 0;
+function viewFunc(evt)
+    {
+        // show viewpoint values
+        //console.log(evt);
+        var time = Date.now();
+        if ((time - timePrev) > 100) {
+          if (evt)
+          {
+          	var pos = evt.position;
+          	var rot = evt.orientation;
+      		  var mat = evt.matrix;
+
+              var camPos = pos.x.toFixed(4)+' '+pos.y.toFixed(4)+' '+pos.z.toFixed(4);
+              var camRot = rot[0].x.toFixed(4)+' '+rot[0].y.toFixed(4)+' '+rot[0].z.toFixed(4)+' '+rot[1].toFixed(4);
+
+              document.getElementById("viewMat").innerHTML = "&ltViewpoint position='" + camPos + "' orientation='" + camRot + "'&gt";
+              timePrev = Date.now();
+          }
+        }
+
+        // update 2d marker also if camera changes since projection is now wrong
+        /*var trans = x3dom.fields.SFVec3f.parse(document.getElementById('bar').getAttribute("translation"));
+	      var pos2d = runtime.calcPagePos(trans.x, trans.y, trans.z);
+        var anno = document.getElementById("anno2d");
+
+        anno.innerHTML = "(" + pos2d[0] + ", " + pos2d[1] + ")";
+        anno.style.left = (pos2d[0]+1) + "px";
+        anno.style.top = (pos2d[1]+1) + "px";*/
+    }
+
 // Function for creation Viewpoint
 function createViewpoint(scene, viewpoint) {
   if (viewpoint == null) return;
   var viewpointView = document.createElement("Viewpoint");
   viewpointView.id = viewpoint.id;
+  viewpointView.className = "testName";
   scene.appendChild(viewpointView);
+  //document.getElementById(viewpoint.id).addEventListener('viewpointChanged', viewFunc, false);
 }
 
 // Change picture on the active button
@@ -201,7 +240,7 @@ function eventAdd() {
     return;
   }
   table.addEventListener('mouseover', function() {
-    document.getElementById("scene_terrain_texture").setAttribute('url', 'bigger_map_light.png');
+    document.getElementById("scene_terrain_texture").setAttribute('url', 'bigger_map_light.png'); //Добавить _ что бы начало работать
   }, false);
   table.addEventListener('mouseout', function() {
     document.getElementById("scene__terrain_texture").setAttribute('url', 'bigger_map.png');

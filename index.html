@@ -6,7 +6,7 @@
         <link rel='stylesheet' type='text/css' href='./x3dom.css'/>
         <link rel='stylesheet' type='text/css' href='mystyle.css'/>
         <script type="text/javascript" src="jquery-1.12.1.min.js"></script>
-        <script type="text/javascript" src="campus.js" ></script>
+        <script type="text/javascript" src="campus3.js" ></script>
         <script type="text/javascript" src="jquery-ui/jquery-ui.min.js" ></script>
     </head>
     <body onload="render()">
@@ -15,21 +15,27 @@
                 <!--<NavigationInfo type="turntable" typeParams='-0.4,60,0.1,1.5' id="navType" speed='1' avatarSize="20.0 180.0 20.0"></NavigationInfo>-->
                 <!--<navigationInfo type='"WALK" "ANY"' id="navType" speed="1"></navigationInfo>-->
                 <!--<NavigationInfo type="lookAt" id="navType" transitiontime="5.0"></NavigationInfo>-->
-                <NavigationInfo type="lookAt" id="navType"></NavigationInfo>
+                <NavigationInfo type="lookAt" id="navType" transitiontime="3.0"></NavigationInfo>
                 <Viewpoint position="6.19233 17.03234 14.97798" orientation="-0.92058 0.35485 0.16314 0.92633" id="main_viewpoint" description="camera"></Viewpoint>
                 <Viewpoint position="" orientation="" id="tmp_viewpoint" description="camera"></Viewpoint>
+                <span id="anno2d" style="position: absolute; background-color: blue; color: yellow; border: yellow solid 1px; z-index: 10; padding: 6px; margin: 2px; width: 60px; height: 30 px; opacity: 0.7; text_align: center; top: 6px; left: 6px;">
+      Annotation</span>
                 <inline url="bigger.x3d" nameSpaceName="scene" mapDEFToID="true" onclick=''></inline>
            </scene>
        </x3d>
        <div id="main_nav">
          <p> Viewpoints: </p>
-         <!--<div id="testAttr" active='true' onclick="clickMe(this)">[-]</div>-->
+         <!--<div id="testAttr" active='true' onclick="hideShowMenu(this)">[-]</div>-->
 
          <div id="slide">
            <hr>
            <ul id="button_table"></ul>
          </div>
-         <!--<div onclick="route()">Click!</div>-->
+         <div onclick="">Click!</div>
+         <p id="viewMat" > &nbsp; </p>
+      </div>
+      <div id = 'tour_nav'>
+
       </div>
     </body>
 </html>
