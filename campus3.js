@@ -41,7 +41,7 @@ var items = [
   ),
   new Item(
     "UCT",
-    new Viewpoint("vscht_human", "3.58396 0.83112 4.03127", "-0.01247 0.99930 0.03539 2.46424"),
+    new Viewpoint("vscht_human", "3.58396 0.83112 4.03127", "-0.01247 0.99930 0.03539 2.4642"),
     new Viewpoint("vscht_bird", "6.22605 4.28331 3.82716", "-0.17713 0.93133 0.31819 2.18501")
   ),
   new Item(
@@ -97,6 +97,20 @@ function render() {
   }
 }
 
+function createTourList() {
+  for (i = 0; i < items.length; i++) {
+    var tour_list_div = document.getElementById("tour_list");
+    var list_item = document.createElement("input");
+    var label = document.createElement("label");
+    var br = document.createElement("br");
+    label.innerHTML = items[i].label;
+    list_item.setAttribute('type', 'checkbox');
+    tour_list_div.appendChild(list_item);
+    tour_list_div.appendChild(label);
+    tour_list_div.appendChild(br);
+  }
+}
+
 function route () {
   var viewpointArray = [
     ["fel_human", "false"],
@@ -112,16 +126,17 @@ function route () {
 
 // Функция для показа-скрытия элемента гуи
 function hideShowMenu(element) {
+  var parent = $(element).parent().get(0);
   if (element.getAttribute('active') == 'true') {
     element.innerHTML = '[+]';
     element.setAttribute('active', 'false');
-    $('#slide').css('opacity', '0');
-    $('#main_nav').css('height', '92px');
+    $("#" + parent.id + "> .slide").css('opacity', '0');
+    $(parent).css('height', '65px');
   } else {
     element.innerHTML = '[-]';
     element.setAttribute('active', 'true');
-    $('#slide').css('opacity', '1');
-    $('#main_nav').css('height', 'auto');
+    $("#" + parent.id + "> .slide").css('opacity', '1');
+    $(parent).css('height', 'auto');
   }
 }
 
@@ -250,9 +265,11 @@ function eventAdd() {
 
 $( document ).ready(function() {
   $("#main_nav").draggable({containment: "window"});
+  $("#tour_nav").draggable({containment: "window"});
 });
 
 document.onload = function() {
   eventAdd();
+  createTourList();
   return;
 };

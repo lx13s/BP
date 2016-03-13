@@ -8,16 +8,27 @@ x3d {
   border: none;
 }
 
-#main_nav {
+.draggable_window {
   position: absolute;
-  right: 50px;
-  top: 50px;
-  width: 300px;
+
+  /*width: 300px;*/
   background-color: #EEE;
   border: 1px solid silver;
   padding: 20px;
   z-index: 5;
   opacity: 0.8;
+}
+
+#main_nav {
+  right: 50px;
+  top: 50px;
+  width: 300px;
+}
+
+#tour_nav {
+  width: 220px;
+  left: 50px;
+  top: 50px;
 }
 
 .viewpoint_button {
