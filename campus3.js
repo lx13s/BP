@@ -245,8 +245,33 @@ function eventAdd() {
   table.addEventListener('mouseout', function() {
     document.getElementById("scene__terrain_texture").setAttribute('url', 'bigger_map.png');
   }, false);
+
+  objectsAnnotations(buildings);
 }
 
+var buildings = [
+  ["scene__ntk_0Geo", "NTK", "scene__first1:lambert7_1", "0.4 0.4 0.4", "1.0 0.0 0.0"]
+]
+
+function objectsAnnotations(objects)
+{
+  for (var object of objects)
+  {
+    var testObject = document.getElementById(object[0]);
+    testObject.addEventListener('mouseover', function() {
+      $("x3d>canvas").css("cursor", "pointer");
+      $("#anno2d").html(object[1]);
+      var material = document.getElementById(object[2]);
+      $(material).attr("diffuseColor", object[4]);
+    }, false);
+    testObject.addEventListener('mouseout', function() {
+      $("x3d>canvas").css("cursor", "grab");
+      $("#anno2d").html("Annotation");
+      var material = document.getElementById(object[2]);
+      $(material).attr("diffuseColor", object[3]);
+    }, false);
+  }
+}
 
 $( document ).ready(function() {
   $("#main_nav").draggable({containment: "window"});
