@@ -20,9 +20,14 @@ x3d {
 }
 
 #main_nav {
+  position: absolute;
   right: 50px;
   top: 50px;
-  width: 300px;
+  width: 260px;  background-color: #EEE;
+    border: 1px solid silver;
+    padding: 20px;
+    z-index: 5;
+    opacity: 0.8;
 }
 
 #tour_nav {
