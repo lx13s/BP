@@ -16,6 +16,11 @@
       </Shape>
       <Shape>
         <Appearance>
+          <Material DEF='first1:lambert7_1' diffuseColor='0.4 0.4 0.4' shininess='0'/>
+        </Appearance>
+      </Shape>
+      <Shape>
+        <Appearance>
           <Material DEF='lambert2_1' diffuseColor='0.4 0.4 0.4' shininess='0'/>
         </Appearance>
               </Shape>
@@ -130,7 +135,7 @@
       <Transform DEF='ntk'>
         <Shape>
           <Appearance>
-            <Material USE='first1:lambert7_0'/>
+            <Material USE='first1:lambert7_1'/>
           </Appearance>
           <IndexedFaceSet USE='ntk_0Geo'/>
         </Shape>
