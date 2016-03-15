@@ -16,38 +16,43 @@ function Item(label, humanViewpoint, birdViewpoint) {
 var items = [
   new Item(
     "Main View",
-    new Viewpoint("main_viewpoint-human", "-0.76461 0.33955 11.39530", "-0.78724 0.61627 0.02182 0.08991"),  // от-к ректорату, высота, от-к витезнему намнести
-    new Viewpoint("main_viewpoint-bird", "-8.88020 18.60237 13.51623", "-0.78298 -0.56043 -0.26993 1.10296")
+    new Viewpoint("main_viewpoint", "6.19233 17.03234 14.97798", "-0.92058 0.35485 0.16314 0.92633"),
+    new Viewpoint("main_viewpoint", "6.19233 17.03234 14.97798", "-0.92058 0.35485 0.16314 0.92633")
   ),
   new Item(
     "FEL",
-    new Viewpoint("fel_human", "-1.15427 0.36467 7.81001", "-0.03665 -0.99870 -0.03537 1.53646"),
-    new Viewpoint("fel_bird", "-2.17067 5.24240 10.78380", "-0.66205 -0.68064 -0.31373 1.21638")
+    new Viewpoint("fel_human", "5.37279 0.80854 5.78953", "-0.09364 -0.99498 -0.03524 0.72308"),
+    new Viewpoint("fel_bird", "5.91318 4.45228 9.18205", "-0.98307 -0.17635 -0.04983 0.55979")
   ),
   new Item(
     "FS",
-    new Viewpoint("stroj_human", "-1.15427 0.36467 2.76583", "-0.03488 -0.99877 -0.03537 1.58590"),
-    new Viewpoint("stroj_bird", "-2.99693 5.59042 -0.25765", "0.19969 0.90957 0.36443 4.06632")
+    new Viewpoint("stroj_human", "1.51959 0.95661 2.88509", "-0.10303 -0.99406 -0.03520 0.66215"),
+    new Viewpoint("stroj_bird", "1.96262 4.73040 5.79700", "-0.94810 -0.30089 -0.10280 0.69173")
   ),
   new Item(
     "NTK",
-    new Viewpoint("ntk_human", "-1.16524 0.36467 0.45499", "-0.06312 -0.99738 -0.03532 1.02260"),
-    new Viewpoint("ntk_bird", "-2.54777 6.77093 2.00792", "-0.67601 -0.66711 -0.31300 1.21343")
-  ),
-  new Item(
-    "FCE",
-    new Viewpoint("stavebni_human", "-0.63949 0.36467 -3.62284", "-0.93547 0.35315 0.01370 0.08292"),
-    new Viewpoint("stavebni_bird", "-4.98515 6.94844 0.21307", "-0.79983 -0.57433 -0.17441 0.72574")
-  ),
-  new Item(
-    "FIT/FA",
-    new Viewpoint("fit_human", "3.08990 0.36467 -3.62284", "-0.95328 0.30191 0.01069 0.07426"),
-    new Viewpoint("fit_bird", "0.10475 10.19714 -1.42952", "-0.85969 -0.44993 -0.24185 1.11757")
+    new Viewpoint("ntk_human", "-1.67761 0.99083 0.46360", "-0.39252 -0.90633 -0.15652 0.82896"),
+    new Viewpoint("ntk_bird", "-0.71579 3.95287 2.85322", "-0.98615 -0.15548 -0.05774 0.72032")
   ),
   new Item(
     "Rektorat",
-    new Viewpoint("rektorat_human", "9.69538 0.36467 9.41136", "-0.08213 0.99600 0.03527 0.81423"),
-    new Viewpoint("rektorat_bird", "9.26513 7.19641 15.86503", "-0.97437 0.20566 0.09116 0.85385")
+    new Viewpoint("rektorat_human", "0.00834 0.97858 9.65671", "-0.23030 -0.97251 -0.03444 0.30515"),
+    new Viewpoint("rektorat_bird", "1.06168 4.56242 12.11615", "-0.99708 0.07184 0.02576 0.69043")
+  ),
+  new Item(
+    "UCT",
+    new Viewpoint("vscht_human", "3.58396 0.83112 4.03127", "-0.01247 0.99930 0.03539 2.4642"),
+    new Viewpoint("vscht_bird", "6.22605 4.28331 3.82716", "-0.17713 0.93133 0.31819 2.18501")
+  ),
+  new Item(
+    "FIT/FA",
+    new Viewpoint("fit_human", "-1.00371 1.09106 -4.58535", "-0.35385 2.91567 0.19062 1.05553"),
+    new Viewpoint("fit_bird", "0.00792 6.52269 -1.44391", "-0.86206 0.46977 0.19016 0.87801")
+  ),
+  new Item(
+    "FCE",
+    new Viewpoint("stavebni_human", "-3.05289 0.98532 -1.46281", "-0.07690 0.99641 0.03529 0.86308"),
+    new Viewpoint("stavebni_bird", "-3.73804 6.22770 3.60835", "-0.77737 0.60450 0.17399 0.70920")
   )
 ];
 
@@ -141,18 +146,32 @@ function movecamera(viewpointId){
   viewpointItem.setAttribute('set_bind', 'true');
 }
 
+var timePrev = 0;
 var camPos;
 var camRot;
-function viewFunc(evt) {        // show viewpoint values
-      if (evt) {
-      	var pos = evt.position;
-      	var rot = evt.orientation;
-  		  var mat = evt.matrix;
-        camPos = pos.x.toFixed(4)+' '+pos.y.toFixed(4)+' '+pos.z.toFixed(4);
-        camRot = rot[0].x.toFixed(4)+' '+rot[0].y.toFixed(4)+' '+rot[0].z.toFixed(4)+' '+rot[1].toFixed(4);
-        //document.getElementById("viewMat").innerHTML = "&ltViewpoint position='" + camPos + "' orientation='" + camRot + "'&gt";
-      }
+function viewFunc(evt)
+    {
+        // show viewpoint values
+        //console.log(evt);
+        //evt = x3dom.activeViewpointId;
+        if (x3dom.paused)
+          return;
+        var time = Date.now();
+        if ((time - timePrev) > 100) {
+          if (evt)
+          {
+          	var pos = evt.position;
+          	var rot = evt.orientation;
+      		  var mat = evt.matrix;
 
+              camPos = pos.x.toFixed(4)+' '+pos.y.toFixed(4)+' '+pos.z.toFixed(4);
+              camRot = rot[0].x.toFixed(4)+' '+rot[0].y.toFixed(4)+' '+rot[0].z.toFixed(4)+' '+rot[1].toFixed(4);
+
+              document.getElementById("viewMat").innerHTML = "&ltViewpoint position='" + camPos + "' orientation='" + camRot + "'&gt";
+              timePrev = Date.now();
+          }
+        }
+console.log("view!");
         // update 2d marker also if camera changes since projection is now wrong
         /*var trans = x3dom.fields.SFVec3f.parse(document.getElementById('bar').getAttribute("translation"));
 	      var pos2d = runtime.calcPagePos(trans.x, trans.y, trans.z);
@@ -161,7 +180,7 @@ function viewFunc(evt) {        // show viewpoint values
         anno.innerHTML = "(" + pos2d[0] + ", " + pos2d[1] + ")";
         anno.style.left = (pos2d[0]+1) + "px";
         anno.style.top = (pos2d[1]+1) + "px";*/
-}
+    }
 
 // Function for creation Viewpoint
 function createViewpoint(scene, viewpoint) {
@@ -209,7 +228,6 @@ function setHighlightedItem(item) {
   item.className += ' viewpoint_button_active';
 }
 
-
 function setViewpointById(viewpointId) {
   // Extract all viewpoints from items array into a separate array
   var viewpoint = items.reduce(function(all, e) {
@@ -229,7 +247,7 @@ function setViewpointById(viewpointId) {
   view.setAttribute('position', viewpoint.position);
   view.setAttribute('orientation', viewpoint.orientation);
   view.setAttribute('description', 'camera');
-  activeViewpointId = viewid;
+  x3dom.activeViewpointId = viewid;
 }
 
 // Изменение текстуры при наведении на объект
@@ -241,82 +259,62 @@ function eventAdd() {
     setTimeout(eventAdd, 500);
     return;
   }
-  /*table.addEventListener('mouseover', function() {
+  table.addEventListener('mouseover', function() {
     document.getElementById("scene_terrain_texture").setAttribute('url', 'bigger_map_light.png'); //Добавить _ что бы начало работать
   }, false);
   table.addEventListener('mouseout', function() {
-    document.getElementById("scene__terrain_texture").setAttribute('url', 'map.png');
-  }, false);*/
-  objectsAnnotations();
+    document.getElementById("scene__terrain_texture").setAttribute('url', 'bigger_map.png');
+  }, false);
+  x3dom.activeViewpointId = "main_viewpoint";
+  objectsAnnotations(buildings);
   document.getElementById("tmp_viewpoint").addEventListener('viewpointChanged', viewFunc, false);
 }
 
-var buildings = [
-  ["scene__fel_0Geo", "FEL", "scene__fel_mat_0", "0.4 0.4 0.4", "0.6 0.6 0.6"],
-  ["scene__ntk_0Geo", "NTK", "scene__ntk_mat_2", "0.4 0.4 0.4", "0.6 0.6 0.6"],
-  ["scene__fs_0Geo", "FS", "scene__fs_mat_3", "0.4 0.4 0.4", "0.6 0.6 0.6"],
-  ["scene__labs_0Geo", "Labs", "scene__labs_mat_4", "0.4 0.4 0.4", "0.6 0.6 0.6"],
-  ["scene__rektorat_old_0Geo", "Old Rektorat", "scene__rek_old_mat_5", "0.4 0.4 0.4", "0.6 0.6 0.6"],
-  ["scene__vsht_0Geo", "Vscht", "scene__vscht_mat_6", "0.4 0.4 0.4", "0.6 0.6 0.6"],
-  ["scene__fit1_0Geo", "FIT/FA", "scene__fit_mat_7", "0.4 0.4 0.4", "0.6 0.6 0.6"],
-  ["scene__fce1_0Geo", "FCE", "scene__fce_mat_8", "0.4 0.4 0.4", "0.6 0.6 0.6"],
-  ["scene__rektorat_new1_0Geo", "New Rektorat", "scene__rektorat_new_mat_9", "0.4 0.4 0.4", "0.6 0.6 0.6"]
-]
 
-// Находит актуальный индекс элемента в массиве по значению.
-function findIndexInData(data, property, value) {
-    var result = -1;
-    data.some(function (item, i) {
-        if (item[property] === value) {
-            result = i;
-            return true;
-        }
-    });
-    return result;
-}
-
-// Подсветка зданий при наведении, изменение курсора и текста в аннотации
-function objectsAnnotations()
-{
-  for (var building of buildings)
+function pauseUnpause() {
+  console.log("paused: " + x3dom.paused);
+  if (!x3dom.paused)
   {
-    var testObject = document.getElementById(building[0]);
-    testObject.addEventListener('mouseover', function() {
-      var firstIndex = findIndexInData(buildings, 0, this.id);
-      $("x3d>canvas").css("cursor", "pointer");
-      $("#anno2d").html(buildings[firstIndex][1]);
-      var material = document.getElementById(buildings[firstIndex][2]);
-      $(material).attr("diffuseColor", buildings[firstIndex][4]);
-    }, false);
-    testObject.addEventListener('mouseout', function() {
-      var firstIndex = findIndexInData(buildings, 0, this.id);
-      $("x3d>canvas").css("cursor", "grab");
-      $("#anno2d").html("Annotation");
-      var material = document.getElementById(buildings[firstIndex][2]);
-      $(material).attr("diffuseColor", buildings[firstIndex][3]);
-    }, false);
-  }
-}
-
-var paused = false;
-var activeViewpointId;
-
-function pauseTour() {
-  if (!paused)
-  {
-    var viewpointId = activeViewpointId;
+    console.log(x3dom.activeViewpointId);
+    var viewpointId = x3dom.activeViewpointId;
     var tmpview = document.getElementById("pause_viewpoint");
     tmpview.setAttribute('position', camPos);
     tmpview.setAttribute('orientation', camRot);
     tmpview.setAttribute('description', 'pause_camera');
     tmpview.setAttribute("set_bind","true");
   } else {
-    setViewpointById(activeViewpointId);
+    console.log("move to: " + x3dom.activeViewpointId);
+    setViewpointById(x3dom.activeViewpointId);
   }
-    if (paused)
-      paused = false;
+    if (x3dom.paused)
+      x3dom.paused = false;
     else
-      paused = true;
+      x3dom.paused = true;
+    console.log("pause changed to: " + x3dom.paused);
+}
+
+var buildings = [
+  ["scene__ntk_0Geo", "NTK", "scene__first1:lambert7_1", "0.4 0.4 0.4", "1.0 0.0 0.0"]
+]
+
+function objectsAnnotations(objects)
+{
+  for (var object of objects)
+  {
+    var testObject = document.getElementById(object[0]);
+    testObject.addEventListener('mouseover', function() {
+      $("x3d>canvas").css("cursor", "pointer");
+      $("#anno2d").html(object[1]);
+      var material = document.getElementById(object[2]);
+      $(material).attr("diffuseColor", object[4]);
+    }, false);
+    testObject.addEventListener('mouseout', function() {
+      $("x3d>canvas").css("cursor", "grab");
+      $("#anno2d").html("Annotation");
+      var material = document.getElementById(object[2]);
+      $(material).attr("diffuseColor", object[3]);
+    }, false);
+  }
 }
 
 $( document ).ready(function() {
@@ -327,5 +325,6 @@ $( document ).ready(function() {
 document.onload = function() {
   eventAdd();
   createTourList();
+  x3dom.paused = false;
   return;
 };
