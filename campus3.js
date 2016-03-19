@@ -320,8 +320,8 @@ function pauseTour() {
 }
 
 $( document ).ready(function() {
-  $("#main_nav").draggable({containment: "window"});
-  $("#tour_nav").draggable({containment: "window"});
+  $("#main_nav").draggable({containment: "window", handle:'.window_header'});
+  $("#tour_nav").draggable({containment: "window", handle:'.window_header'});
 });
 
 document.onload = function() {
