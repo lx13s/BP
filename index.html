@@ -2,46 +2,58 @@
     <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>BP project</title>
-        <script type='text/javascript' src='./x3dom.js'> </script>
+        <script type='text/javascript' src='./x3dom-full.js'> </script>
         <link rel='stylesheet' type='text/css' href='./x3dom.css'/>
         <link rel='stylesheet' type='text/css' href='mystyle.css'/>
         <script type="text/javascript" src="jquery-1.12.1.min.js"></script>
-        <script type="text/javascript" src="campus3.js" ></script>
+        <script type="text/javascript" src="campus.js" ></script>
         <script type="text/javascript" src="jquery-ui/jquery-ui.min.js" ></script>
     </head>
     <body onload="render()">
         <x3d id="x3d_id">
+
             <scene id="scene">
                 <!--<NavigationInfo type="turntable" typeParams='-0.4,60,0.1,1.5' id="navType" speed='1' avatarSize="20.0 180.0 20.0"></NavigationInfo>-->
                 <!--<navigationInfo type='"WALK" "ANY"' id="navType" speed="1"></navigationInfo>-->
                 <NavigationInfo type="lookAt" id="navType" transitiontime="5.0"></NavigationInfo>
                 <!--<NavigationInfo type="lookAt" id="navType" transitiontime="3.0"></NavigationInfo>-->
-                <Viewpoint position="-8.88020 18.60237 13.51623" orientation="-0.78298 -0.56043 -0.26993 1.10296" id="main_viewpoint-bird" description="camera"></Viewpoint>
+                <transform id="scene_rotation" Rotation="0,1,0,0" Translation="0,0,0" center="0,0,0">
+                  <Viewpoint position="-8.88020 18.60237 13.51623" orientation="-0.78298 -0.56043 -0.26993 1.10296" id="main_viewpoint-bird" description="camera"></Viewpoint>
+                </transform>
                 <Viewpoint position="" orientation="" id="tmp_viewpoint" description="camera"></Viewpoint>
                 <Viewpoint position="" orientation="" id="pause_viewpoint" description="camera"></Viewpoint>
                 <span id="anno2d" style="position: absolute; background-color: blue; color: yellow; border: yellow solid 1px; z-index: 10; padding: 6px; margin: 2px; width: 60px; height: 30 px; opacity: 0.7; text_align: center; top: 6px; left: 6px;">
       Annotation</span>
                 <inline url="full_scene.x3d" nameSpaceName="scene" mapDEFToID="true" onclick=''></inline>
            </scene>
+
        </x3d>
        <div id="main_nav" class = "draggable_window">
-         <p class="window_header" style="width:100%; cursor:move;"> Viewpoints: </p>
-         <div active='true' onclick="hideShowMenu(this)">[-]</div>
-
+         <div class="window_header"><p>Views</p></div>
+         <div active='true' onclick="hideShowMenu(this)" style="z-index: 1000;"><img src="arrow-up.png" class="slide_icon"></div>
+         <br />
          <div class="slide">
            <hr>
            <ul id="button_table"></ul>
          </div>
-         <div onclick="pauseTour();">Click!</div>
+         <!--<div onclick="pauseTour();">Click!</div>-->
          <p id="viewMat" > &nbsp; </p>
       </div>
       <div id = 'tour_nav' class = "draggable_window">
-        <p class="window_header" style="width:100%; cursor:move;"> Guided Tour: </p>
-        <div active='true' onclick="hideShowMenu(this)">[-]</div>
+        <div class="window_header"><p>Guided Tour</p></div>
+        <div active='true' onclick="hideShowMenu(this)" style="z-index: 1000;"><img src="arrow-up.png" class="slide_icon"></div>
+        <br />
         <div class="slide">
           <hr>
           <div id="tour_list"> </div>
         </div>
+      </div>
+      <div id="camera_navigation">
+        <img src="arrow-right.png" class="cam_icon" onclick="rotate_map(1)">
+        <img src="arrow-left.png" class="cam_icon" onclick="rotate_map(-1)">
+        <img src="plus.png" class="cam_icon" onclick="zoom(-0.15)">
+        <img src="minus.png" class="cam_icon" onclick="zoom(0.15)">
+        <img src="info.png" class="cam_icon" onclick="annotationtest()">
       </div>
     </body>
 </html>

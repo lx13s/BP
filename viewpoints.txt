@@ -1,30 +1,14 @@
-main-view-human: <Viewpoint position="-0.76461 0.33955 11.39530" orientation="-0.78724 0.61627 0.02182 0.08991" zNear="0.00349" zFar="34.90483" description="camera"></Viewpoint>
+Маршруты:
 
-main-view-bird: <Viewpoint position="-8.88020 18.60237 13.51623" orientation="-0.78298 -0.56043 -0.26993 1.10296" zNear="5.41385" zFar="49.47896" description="camera"></Viewpoint>
+Main_view -> FEL
 
-fel-view-human: <Viewpoint position="-0.64028 0.18618 7.81001" orientation="-0.03665 -0.99870 -0.03537 1.53646" zNear="0.00306" zFar="30.63887" description="camera"></Viewpoint>
+"-0.76461 0.33955 11.39530", "-0.78724 0.61627 0.02182 0.08991" ->
 
-fel-view-bird: <Viewpoint position="-2.17067 5.24240 10.78380" orientation="-0.66205 -0.68064 -0.31373 1.21638" zNear="0.00352" zFar="35.19608" description="camera"></Viewpoint>
+"-0.76461 0.36467 7.81001", "-0.78724 0.61627 0.02182 0.08991" ->
 
-fs-view-human: <Viewpoint position="-1.15427 0.36467 2.76583" orientation="-0.03488 -0.99877 -0.03537 1.58590" zNear="0.00248" zFar="24.84590" description="camera"></Viewpoint>
+"-0.76461 0.36467 7.81001", "-0.03665 -0.99870 -0.03537 1.53646" ->
 
-fs-view-bird: <Viewpoint position="-2.99693 5.59042 -0.25765" orientation="0.19969 0.90957 0.36443 4.06632" zNear="0.00271" zFar="27.07488" description="camera"></Viewpoint>
-
-ntk-view-human: <Viewpoint position="-1.16524 0.15972 0.45499" orientation="-0.06312 -0.99738 -0.03532 1.02260" zNear="0.00228" zFar="22.80843" description="camera"></Viewpoint>
-
-ntk-view-bird: <Viewpoint position="-2.54777 6.77093 2.00792" orientation="-0.67601 -0.66711 -0.31300 1.21343" zNear="0.00286" zFar="28.59442" description="camera"></Viewpoint>
-
-fit-view-human: <Viewpoint position="3.08990 0.82261 -2.87117" orientation="-0.95328 0.30191 0.01069 0.07426" zNear="0.00254" zFar="25.44348" description="camera"></Viewpoint>
-
-fit-view-bird: <Viewpoint position="0.10475 10.19714 -1.42952" orientation="-0.85969 -0.44993 -0.24185 1.11757" zNear="0.00316" zFar="31.56358" description="camera"></Viewpoint>
-
-fce-view-human: <Viewpoint position="-0.63949 0.38075 -3.62284" orientation="-0.93547 0.35315 0.01370 0.08292" zNear="0.00247" zFar="24.73325" description="camera"></Viewpoint>
-
-fce-view-bird: <Viewpoint position="-4.98515 6.94844 0.21307" orientation="-0.79983 -0.57433 -0.17441 0.72574" zNear="0.00299" zFar="29.85303" description="camera"></Viewpoint>
-
-rektorat-view-human: <Viewpoint position="9.67249 0.62197 10.33154" orientation="-0.35392 0.92468 0.14034 0.81022" zNear="0.00380" zFar="38.03299" description="camera"></Viewpoint>
-
-rektorat-view-bird: <Viewpoint position="7.91799 8.69456 14.43732" orientation="-0.93908 0.31016 0.14810 0.94077" zNear="0.95135" zFar="42.78521" description="camera"></Viewpoint>
+"-1.15427 0.36467 7.81001", "-0.03665 -0.99870 -0.03537 1.53646"
 
 
 
