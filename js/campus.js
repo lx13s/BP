@@ -35,7 +35,7 @@ var items = [
     new Viewpoint("ntk_bird", "-2.54777 6.77093 2.00792", "-0.67601 -0.66711 -0.31300 1.21343")
   ),
   new Item(
-    "FCE",
+    "FSv",
     new Viewpoint("stavebni_human", "-0.63949 0.36467 -3.62284", "-0.93547 0.35315 0.01370 0.08292"),
     new Viewpoint("stavebni_bird", "-4.98515 6.94844 0.21307", "-0.79983 -0.57433 -0.17441 0.72574")
   ),
@@ -45,7 +45,7 @@ var items = [
     new Viewpoint("fit_bird", "0.10475 10.19714 -1.42952", "-0.85969 -0.44993 -0.24185 1.11757")
   ),
   new Item(
-    "Rektorat",
+    "RCVUT",
     new Viewpoint("rektorat_human", "9.69538 0.36467 9.41136", "-0.08213 0.99600 0.03527 0.81423"),
     new Viewpoint("rektorat_bird", "9.26513 7.19641 15.86503", "-0.97437 0.20566 0.09116 0.85385")
   )
@@ -100,12 +100,12 @@ function render() {
 function createTourList() {
   for (i = 0; i < items.length; i++) {
     var tour_list_div = document.getElementById("tour_list");
-    var list_item = document.createElement("input");
+    //var list_item = document.createElement("input");
     var label = document.createElement("label");
     var br = document.createElement("br");
     label.innerHTML = items[i].label;
-    list_item.setAttribute('type', 'checkbox');
-    tour_list_div.appendChild(list_item);
+    //list_item.setAttribute('type', 'checkbox');
+    //tour_list_div.appendChild(list_item);
     tour_list_div.appendChild(label);
     tour_list_div.appendChild(br);
   }
@@ -158,7 +158,7 @@ function viewFunc(evt) {        // show viewpoint values
         camRot = rot[0].x.toFixed(4)+' '+rot[0].y.toFixed(4)+' '+rot[0].z.toFixed(4)+' '+rot[1].toFixed(4);
         //document.getElementById("viewMat").innerHTML = "&ltViewpoint position='" + camPos + "' orientation='" + camRot + "'&gt";
       }
-      annotationtest();
+      //annotationtest();
         // update 2d marker also if camera changes since projection is now wrong
         /*var trans = x3dom.fields.SFVec3f.parse(document.getElementById('bar').getAttribute("translation"));
 	      var pos2d = runtime.calcPagePos(trans.x, trans.y, trans.z);
@@ -170,24 +170,22 @@ function viewFunc(evt) {        // show viewpoint values
 }
 
 var annotationArray = [
-  ["scene__rektorat_old", 'short information rektorat old', 'longlonglonglonglonglonglonglonglonglong information rektorat old'],
-  ["scene__fs", 'short information fs', 'longlonglonglonglonglonglonglonglonglong information fs'],
-  ["scene__fel", 'short information fel', 'longlonglonglonglonglonglonglonglonglong information fel'],
-  ["scene__fit1", 'short information fit', 'longlonglonglonglonglonglonglonglonglong information fit']
-  /*["scene__fel", 'short information fel', 'longlonglonglonglonglonglonglonglonglong information fel'],
-  ["scene__ntk", 'short information ntk', 'longlonglonglonglonglonglonglonglonglong information ntk'],
-  ["scene__fs", 'short information fs', 'longlonglonglonglonglonglonglonglonglong information fs'],
-  ["scene__labs", 'short information labs', 'longlonglonglonglonglonglonglonglonglong information labs'],
-  ["scene__vsht", 'short information vsht', 'longlonglonglonglonglonglonglonglonglong information vsht'],
-  ["scene__fce1", 'short information fce', 'longlonglonglonglonglonglonglonglonglong information fce'],
-  ["scene__rektorat_new1", 'short information rektorat new', 'longlonglonglonglonglonglonglonglonglong information rektorat new']*/
+  ["scene__rektorat_old", 'Old CTU Administration', 'https://www.cvut.cz/rektorat-cvut information rektorat old'],
+  ["scene__fs", 'Faculty of Mechanicak Engineering', 'https://www.fs.cvut.cz/en/home/ information fs'],
+  ["scene__fel", 'Faculty of Electrical Engineering', 'http://www.fel.cvut.cz information fel'],
+  ["scene__fit1", 'Faculty of Information Technology', 'http://www.fa.cvut.cz and http://www.fit.cvut.cz information fit'],
+  ["scene__ntk", 'National Library of Technology', 'https://www.techlib.cz/en/ information ntk'],
+  ["scene__labs", 'Labs', 'longlonglonglonglonglonglonglonglonglong information labs'],
+  ["scene__vsht", 'University of Chemistry and Technology', 'longlonglonglonglonglonglonglonglonglong information vsht'],
+  ["scene__fce1", 'Faculty of Civil Engineering', 'http://www.fsv.cvut.cz information fce'],
+  ["scene__rektorat_new1", 'New CTU Administration', 'information rektorat new']
 ];
 
 function annotationtest() {
   var x3d = document.getElementById('x3d_id');
   for (var i = 0; i < annotationArray.length; i++) {
     var rek = $("#" + annotationArray[i][0]).attr('translation').split(' ');
-    var pos2d = x3d.runtime.calcCanvasPos(parseFloat(rek[0]), parseFloat(rek[1])+2.5, parseFloat(rek[2]));
+    var pos2d = x3d.runtime.calcCanvasPos(parseFloat(rek[0]), parseFloat(rek[1])+3, parseFloat(rek[2]));
     var annotation = document.getElementById(annotationArray[i][0].split('__')[1]);
     /*annotation.innerHTML = "(" + pos2d[0] + ", " + pos2d[1] + "): " + annotationArray[i][1];*/
     annotation.innerHTML = annotationArray[i][1];
@@ -304,8 +302,8 @@ function eventAdd() {
   table.addEventListener('mouseout', function() {
     document.getElementById("scene__terrain_texture").setAttribute('url', 'map.png');
   }, false);*/
-  createAnnotationWindows();
-  annotationtest();
+  //createAnnotationWindows();
+  //annotationtest();
   objectsAnnotations();
   document.getElementById("tmp_viewpoint").addEventListener('viewpointChanged', viewFunc, false);
 }
@@ -314,13 +312,13 @@ function rotate_map(value) {
   var rotation_angle = parseFloat($('#scene_rotation').attr('rotation').split(',')[3]);
   rotation_angle += 0.5 * value;
   $('#scene_rotation').attr('rotation','0,1,0,' + rotation_angle);
-  annotationtest();
+  //annotationtest();
 }
 
 function zoom(delta) {
 	var vpt = document.getElementById("main_viewpoint-bird");
 	vpt.fieldOfView = parseFloat(vpt.fieldOfView) + delta;
-  annotationtest();
+  //annotationtest();
 }
 
 var buildings = [
