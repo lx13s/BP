@@ -34,27 +34,44 @@ x3d {
   width: 100%;
 }
 
-.slide_icon {
+.slide_icon_up {
   width: 20px;
   height: 20px;
   float: right;
   z-index: 1000;
   cursor: pointer;
+  background-image: url("../img/arrow-up-min.png");
 }
 
-.slide_icon:hover {
+.slide_icon_up:hover {
+  background-image: url("../img/arrow-up-hover-min.png");
+}
+
+.slide_icon_down {
+  width: 20px;
+  height: 20px;
+  float: right;
+  z-index: 1000;
+  cursor: pointer;
+  background-image: url("../img/arrow-down-min.png");
+}
+
+.slide_icon_down:hover {
+  background-image: url("../img/arrow-down-hover-min.png");
 }
 
 #main_nav {
   right: 50px;
   top: 50px;
   width: 260px;
+  z-index: 1000;
 }
 
 #tour_nav {
   width: 220px;
   left: 50px;
   top: 50px;
+  z-index: 1000;
 }
 
 .viewpoint_button {
@@ -129,13 +146,87 @@ hr {
   height: 70px;
   position: absolute;
   text-align: center;
+  z-index: 15;
 }
+
 .cam_icon {
+  display: inline-block;
   width: 50px;
   height: 50px;
   opacity: 0.8;
   margin-left: 10px;
   cursor: pointer;
+}
+
+.cam_icon_left_arrow {
+  background-image: url("../img/arrow-left-min.png");
+}
+
+.cam_icon_left_arrow:hover {
+  background-image: url("../img/arrow-left-min-hover.png");
+}
+
+.cam_icon_right_arrow {
+  background-image: url("../img/arrow-right-min.png");
+}
+
+.cam_icon_right_arrow:hover {
+  background-image: url("../img/arrow-right-min-hover.png");
+}
+
+.cam_icon_plus {
+  background-image: url("../img/plus-min.png");
+}
+
+.cam_icon_plus:hover {
+  background-image: url("../img/plus-min-hover.png");
+}
+
+.cam_icon_minus {
+  background-image: url("../img/minus-min.png");
+}
+
+.cam_icon_minus:hover {
+  background-image: url("../img/minus-min-hover.png");
+}
+
+.cam_icon_info {
+  background-image: url("../img/info-min.png");
+}
+
+.cam_icon_info:hover {
+  background-image: url("../img/info-min-hover.png");
+}
+
+.annotationWindow {
+  position: absolute;
+  background-color: blue;
+  color: yellow;
+  border: yellow solid 1px;
+  z-index: 10;
+  padding: 6px;
+  margin: 2px;
+  width: 120px;
+  height: auto;
+  text_align: center;
+  top: 100px;
+  left: 300px;
+}
+
+.bigAnnotationWindow {
+  position: absolute;
+  background-color: blue;
+  color: yellow;
+  border: yellow solid 1px;
+  z-index: 10;
+  padding: 6px;
+  margin: 2px;
+  width: 120px;
+  height: auto;
+  background-color: green;
+  word-wrap: break-word;
+  top: 100px;
+  left: 300px;
 }
 
 #info_div {
@@ -145,9 +236,10 @@ hr {
   right: 700px;
   background-color: #EEE;
   border: 1px solid silver;
-  z-index: 5;
+  z-index: 15;
   opacity: 0.85;
   padding: 20px;
+  display: none;
 }
 
 .info_line {
@@ -168,7 +260,7 @@ hr {
 }
 
 .close_img {
-  background-image: url("close_min.png");
+  background-image: url("../img/close_min.png");
   float: right;
   width: 30px;
   height: 30px;
@@ -176,7 +268,7 @@ hr {
 }
 
 .close_img:hover {
-  background-image: url("hover_close_min.png");
+  background-image: url("../img/hover_close_min.png");
 }
 
 .title_info {

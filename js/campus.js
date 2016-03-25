@@ -72,7 +72,7 @@ function render() {
 
     if (item.humanViewpoint) {
       var img_human = document.createElement("img");
-      img_human.setAttribute('src', 'human.png');
+      img_human.setAttribute('src', './img/human.png');
       img_human.setAttribute('class', 'viewpoint_button');
       img_human.setAttribute('onclick', `setViewpointById('${item.humanViewpoint.id}'); document.getElementById('${item.humanViewpoint.id}').setAttribute('set_bind', 'true'); setHighlightedItem(this);`);
       img_human.setAttribute('title', 'Human view');
@@ -81,7 +81,7 @@ function render() {
 
     if (item.birdViewpoint) {
       var img_bird = document.createElement("img");
-      img_bird.setAttribute('src', 'bird.png');
+      img_bird.setAttribute('src', './img/bird.png');
       if(!flag) {
         flag = true;
         img_bird.setAttribute('class', 'viewpoint_button_active viewpoint_button');
@@ -128,14 +128,15 @@ function route () {
 function hideShowMenu(element) {
   var parent = $(element).parent().get(0);
   if (element.getAttribute('active') == 'true') {
-    element.innerHTML = '<img src="arrow-down.png" class="slide_icon">';
+    element.setAttribute('class', 'slide_icon_down');
     element.setAttribute('active', 'false');
-    $("#" + parent.id + "> .slide").css('opacity', '0');
+    /*$("#" + parent.id + "> .slide").css('opacity', '0');*/
+    $("#" + parent.id + "> .slide").hide();
     $(parent).css('height', '65px');
   } else {
-    element.innerHTML = '<img src="arrow-up.png" class="slide_icon">';
+    element.setAttribute('class', 'slide_icon_up');
     element.setAttribute('active', 'true');
-    $("#" + parent.id + "> .slide").css('opacity', '1');
+    $("#" + parent.id + "> .slide").show();//css('opacity', '1');
     $(parent).css('height', 'auto');
   }
 }
@@ -157,7 +158,7 @@ function viewFunc(evt) {        // show viewpoint values
         camRot = rot[0].x.toFixed(4)+' '+rot[0].y.toFixed(4)+' '+rot[0].z.toFixed(4)+' '+rot[1].toFixed(4);
         //document.getElementById("viewMat").innerHTML = "&ltViewpoint position='" + camPos + "' orientation='" + camRot + "'&gt";
       }
-
+      annotationtest();
         // update 2d marker also if camera changes since projection is now wrong
         /*var trans = x3dom.fields.SFVec3f.parse(document.getElementById('bar').getAttribute("translation"));
 	      var pos2d = runtime.calcPagePos(trans.x, trans.y, trans.z);
@@ -168,14 +169,55 @@ function viewFunc(evt) {        // show viewpoint values
         anno.style.top = (pos2d[1]+1) + "px";*/
 }
 
+var annotationArray = [
+  ["scene__rektorat_old", 'short information rektorat old', 'longlonglonglonglonglonglonglonglonglong information rektorat old'],
+  ["scene__fs", 'short information fs', 'longlonglonglonglonglonglonglonglonglong information fs'],
+  ["scene__fel", 'short information fel', 'longlonglonglonglonglonglonglonglonglong information fel'],
+  ["scene__fit1", 'short information fit', 'longlonglonglonglonglonglonglonglonglong information fit']
+  /*["scene__fel", 'short information fel', 'longlonglonglonglonglonglonglonglonglong information fel'],
+  ["scene__ntk", 'short information ntk', 'longlonglonglonglonglonglonglonglonglong information ntk'],
+  ["scene__fs", 'short information fs', 'longlonglonglonglonglonglonglonglonglong information fs'],
+  ["scene__labs", 'short information labs', 'longlonglonglonglonglonglonglonglonglong information labs'],
+  ["scene__vsht", 'short information vsht', 'longlonglonglonglonglonglonglonglonglong information vsht'],
+  ["scene__fce1", 'short information fce', 'longlonglonglonglonglonglonglonglonglong information fce'],
+  ["scene__rektorat_new1", 'short information rektorat new', 'longlonglonglonglonglonglonglonglonglong information rektorat new']*/
+];
+
 function annotationtest() {
   var x3d = document.getElementById('x3d_id');
-  var rek = $("#scene__rektorat_old").attr('translation').split(' ');
-  var pos2d = x3d.runtime.calcPagePos(parseFloat(rek[0]), parseFloat(rek[1]), parseFloat(rek[2])-5);
-  var anno = document.getElementById("anno2d");
-  anno.innerHTML = "(" + pos2d[0] + ", " + pos2d[1] + ")";
-  anno.style.left = (pos2d[0]+1) + "px";
-  anno.style.top = (pos2d[1]+1) + "px";
+  for (var i = 0; i < annotationArray.length; i++) {
+    var rek = $("#" + annotationArray[i][0]).attr('translation').split(' ');
+    var pos2d = x3d.runtime.calcCanvasPos(parseFloat(rek[0]), parseFloat(rek[1])+2.5, parseFloat(rek[2]));
+    var annotation = document.getElementById(annotationArray[i][0].split('__')[1]);
+    /*annotation.innerHTML = "(" + pos2d[0] + ", " + pos2d[1] + "): " + annotationArray[i][1];*/
+    annotation.innerHTML = annotationArray[i][1];
+    annotation.style.left = (pos2d[0]+1) + "px";
+    annotation.style.top = (pos2d[1]+1) + "px";
+  }
+}
+
+function createAnnotationWindows() {
+  var scene = document.getElementById('scene');
+  for (var i = 0; i < annotationArray.length; i++) {
+    var annotationSpan = document.createElement("span");
+    var annotaionId = annotationArray[i][0].split('__')[1];
+    annotationSpan.setAttribute('id', annotaionId);
+    annotationSpan.setAttribute('class', 'annotationWindow');
+    annotationSpan.setAttribute('onclick', 'annotationTextChanger(this)');
+    scene.appendChild(annotationSpan);
+  }
+}
+
+// функция для нахождения подробной информации по зданиям в массиве
+function annotationTextChanger(element) {
+  var firstIndex = findIndexInData(annotationArray, 0, 'scene__' + element.id);
+  if (element.innerHTML == annotationArray[firstIndex][1]) {
+    element.innerHTML = annotationArray[firstIndex][2];
+    element.setAttribute('class', 'bigAnnotationWindow');
+  } else {
+    element.innerHTML = annotationArray[firstIndex][1];
+    element.setAttribute('class', 'annotationWindow');
+  }
 }
 
 // Function for creation Viewpoint
@@ -194,18 +236,18 @@ function changeImage(element) {
     for (var i = 0; i < imgs.length; i++)
     {
          if (element !== imgs[i] && imgs[i].src.match("human")) {
-              imgs[i].src="human.png";
+              imgs[i].src="./img/human.png";
             }
         if (element !== imgs[i] && imgs[i].src.match("bird")) {
-             imgs[i].src="bird.png";
+             imgs[i].src="./img/bird.png";
            }
     }
 
     if (!element.src.match("active")) {
         if (element.src.match("human"))
-          element.src = "human_active.png";
+          element.src = "./img/human_active.png";
         else {
-          element.src = "bird_active.png";
+          element.src = "./img/bird_active.png";
         }
     }
 }
@@ -262,6 +304,8 @@ function eventAdd() {
   table.addEventListener('mouseout', function() {
     document.getElementById("scene__terrain_texture").setAttribute('url', 'map.png');
   }, false);*/
+  createAnnotationWindows();
+  annotationtest();
   objectsAnnotations();
   document.getElementById("tmp_viewpoint").addEventListener('viewpointChanged', viewFunc, false);
 }
@@ -270,11 +314,13 @@ function rotate_map(value) {
   var rotation_angle = parseFloat($('#scene_rotation').attr('rotation').split(',')[3]);
   rotation_angle += 0.5 * value;
   $('#scene_rotation').attr('rotation','0,1,0,' + rotation_angle);
+  annotationtest();
 }
 
 function zoom(delta) {
 	var vpt = document.getElementById("main_viewpoint-bird");
 	vpt.fieldOfView = parseFloat(vpt.fieldOfView) + delta;
+  annotationtest();
 }
 
 var buildings = [
@@ -345,12 +391,13 @@ function pauseTour() {
       paused = true;
 }
 
-$( document ).ready(function() {
-  $("#main_nav").draggable({containment: "window", handle:'.window_header'});
-  $("#tour_nav").draggable({containment: "window", handle:'.window_header'});
-});
+function showOrHide(element) {
+  $(element).is(':visible') == true ? $(element).hide() : $(element).show();
+}
 
 document.onload = function() {
+  $("#main_nav").draggable({containment: "window", handle:'.window_header'});
+  $("#tour_nav").draggable({containment: "window", handle:'.window_header'});
   eventAdd();
   createTourList();
   return;

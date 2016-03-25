@@ -2,12 +2,12 @@
     <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>BP project</title>
-        <script type='text/javascript' src='./x3dom-full.js'> </script>
-        <link rel='stylesheet' type='text/css' href='./x3dom.css'/>
-        <link rel='stylesheet' type='text/css' href='mystyle.css'/>
-        <script type="text/javascript" src="jquery-1.12.1.min.js"></script>
-        <script type="text/javascript" src="campus.js" ></script>
-        <script type="text/javascript" src="jquery-ui/jquery-ui.min.js" ></script>
+        <script type='text/javascript' src='js/x3dom-full.js'> </script>
+        <link rel='stylesheet' type='text/css' href='css/x3dom.css'/>
+        <link rel='stylesheet' type='text/css' href='css/mystyle.css'/>
+        <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
+        <script type="text/javascript" src="js/campus.js" ></script>
+        <script type="text/javascript" src="js/jquery-ui/jquery-ui.min.js" ></script>
     </head>
     <body onload="render()">
         <x3d id="x3d_id">
@@ -22,26 +22,26 @@
                 </transform>
                 <Viewpoint position="" orientation="" id="tmp_viewpoint" description="camera"></Viewpoint>
                 <Viewpoint position="" orientation="" id="pause_viewpoint" description="camera"></Viewpoint>
-                <span id="anno2d" style="position: absolute; background-color: blue; color: yellow; border: yellow solid 1px; z-index: 10; padding: 6px; margin: 2px; width: 60px; height: 30 px; opacity: 0.7; text_align: center; top: 6px; left: 6px;">
-      Annotation</span>
+                <!--<span id="anno2d" style="position: absolute; background-color: blue; color: yellow; border: yellow solid 1px; z-index: 10; padding: 6px; margin: 2px; width: 60px; height: 30 px; opacity: 0.7; text_align: center; top: 6px; left: 6px;">
+      Annotation</span>-->
                 <inline url="full_scene.x3d" nameSpaceName="scene" mapDEFToID="true" onclick=''></inline>
            </scene>
 
        </x3d>
        <div id="main_nav" class = "draggable_window">
          <div class="window_header"><p>Views</p></div>
-         <div active='true' onclick="hideShowMenu(this)" style="z-index: 1000;"><img src="arrow-up.png" class="slide_icon"></div>
+         <div active='true' onclick="hideShowMenu(this)" class="slide_icon_up"></div>
          <br />
          <div class="slide">
            <hr>
            <ul id="button_table"></ul>
          </div>
-         <!--<div onclick="pauseTour();">Click!</div>-->
+         <!--<div onclick="annotationtest();">Click!</div>-->
          <p id="viewMat" > &nbsp; </p>
       </div>
       <div id = 'tour_nav' class = "draggable_window">
         <div class="window_header"><p>Guided Tour</p></div>
-        <div active='true' onclick="hideShowMenu(this)" style="z-index: 1000;"><img src="arrow-up.png" class="slide_icon"></div>
+        <div active='true' onclick="hideShowMenu(this)" class="slide_icon_up"></div>
         <br />
         <div class="slide">
           <hr>
@@ -49,22 +49,22 @@
         </div>
       </div>
       <div id="camera_navigation">
-        <img src="arrow-right.png" class="cam_icon" onclick="rotate_map(1)">
-        <img src="arrow-left.png" class="cam_icon" onclick="rotate_map(-1)">
-        <img src="plus.png" class="cam_icon" onclick="zoom(-0.15)">
-        <img src="minus.png" class="cam_icon" onclick="zoom(0.15)">
-        <img src="info.png" class="cam_icon" onclick="annotationtest()">
+        <div class="cam_icon cam_icon_right_arrow" onclick="rotate_map(1)"></div>
+        <div class="cam_icon cam_icon_left_arrow" onclick="rotate_map(-1)"></div>
+        <div class="cam_icon cam_icon_plus" onclick="zoom(-0.15)"></div>
+        <div class="cam_icon cam_icon_minus" onclick="zoom(0.15)"></div>
+        <div class="cam_icon cam_icon_info" onclick="showOrHide($('#info_div'));"></div>
       </div>
       <div id="info_div">
-        <div class="close_img"></div>
+        <div class="close_img" onclick="showOrHide($('#info_div'));"></div>
         <div class="title_info"><p>How to use 3D map</p></div>
         <hr>
         <div class="info_line">
-          <img src="Mouse_Left.png" class="mouse_img"><div class="mouse_description">Click the left mouse button for move in</div>
+          <img src="img/Mouse_Left.png" class="mouse_img"><div class="mouse_description">Click the left mouse button for move in</div>
         </div>
         <br/>
         <div class="info_line">
-          <img src="Mouse_Right.png" class="mouse_img"><div class="mouse_description">Click the right mouse button fot move out</div>
+          <img src="img/Mouse_Right.png" class="mouse_img"><div class="mouse_description">Click the right mouse button fot move out</div>
         </div>
       </div>
     </body>

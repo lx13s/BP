@@ -1,4 +1,0 @@
-Show Object
-
-$element = document.getElementById("x3d_id");
-  $element.runtime.showObject(document.getElementById("scene__fit_shape"));
