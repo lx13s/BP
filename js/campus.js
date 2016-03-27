@@ -1,5 +1,7 @@
 
 var document = window['document'];
+var width = 0;
+var height = 0;
 
 function Viewpoint(id, position, orientation) {
   this.id = id;
@@ -198,6 +200,12 @@ function annotationtest() {
     var annotation = document.getElementById(annotationArray[i][0].split('__')[1]);
     /*annotation.innerHTML = "(" + pos2d[0] + ", " + pos2d[1] + "): " + annotationArray[i][1];*/
     annotation.innerHTML = annotationArray[i][1];
+    if (pos2d[0] < 0 || pos2d[1] < 0 || pos2d[0] + $(annotation).outerWidth(true) + 6 > width || pos2d[1] + $(annotation).outerHeight(true) + 6 > height)
+    {
+      $(annotation).hide();
+    } else {
+      $(annotation).show();
+    }
     annotation.style.left = (pos2d[0]+1) + "px";
     annotation.style.top = (pos2d[1]+1) + "px";
   }
@@ -407,5 +415,7 @@ document.onload = function() {
   $("#tour_nav").draggable({containment: "window", handle:'.window_header'});
   eventAdd();
   createTourList();
+  height = $(document).height();
+  width = $(document).width();
   return;
 };
