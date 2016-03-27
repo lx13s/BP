@@ -56,7 +56,7 @@ x3d {
 }
 
 .slide_icon_down:hover {
-  background-image: url("../img/arrow-down-hover-min.png");
+  background-image: url("../img/arrow-down_hover1.png");
 }
 
 #main_nav {
@@ -82,7 +82,7 @@ x3d {
 }
 
 .viewpoint_button:hover {
-  background-color: #FFB93E;
+  background-color: #C0D4EC;
 }
 
 .viewpoint_button:first-child {
@@ -94,8 +94,9 @@ x3d {
 }
 
 .viewpoint_button_active:hover {
-  background-color: #FFB93E;
+  background-color: #C0D4EC;
 }
+/*364D68 - для стрелок*/
 
 .img_div {
   float: right;
@@ -199,9 +200,11 @@ hr {
 
 .annotationWindow {
   position: absolute;
-  background-color: #EEE;
-  border: 1px solid silver;
-  color: black;
+  background: none;
+  /*border: 1px solid silver;*/
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  word-wrap: break-word;
   z-index: 10;
   padding: 6px;
   margin: 2px;
@@ -210,20 +213,19 @@ hr {
   text_align: center;
   top: 100px;
   left: 300px;
-  opacity: 0.8;
 }
 
 .bigAnnotationWindow {
   position: absolute;
-  background-color: blue;
-  color: yellow;
-  border: yellow solid 1px;
+  background-color: #EEE;
+  color: black;
+  border: 1px solid silver;
   z-index: 10;
   padding: 6px;
   margin: 2px;
   width: 120px;
   height: auto;
-  background-color: green;
+  opacity: 0.85;
   word-wrap: break-word;
   top: 100px;
   left: 300px;
@@ -273,11 +275,18 @@ hr {
 
 .pause_div {
   position: absolute;
+  width: 100px;
+  height: 100px;
   top: 60%;
   left: 45%;
   cursor: pointer;
   opacity: 0.9;
   z-index: 150;
+  background-image: url("../img/pause.png");
+}
+
+.pause_div:hover {
+  background-image: url("../img/pause_hover.png");
 }
 
 .title_info {
